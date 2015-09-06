@@ -1,4 +1,6 @@
 <?php
+namespace Yardan\Requester;
+
 abstract class Requester {
     
     protected $headers = array();
