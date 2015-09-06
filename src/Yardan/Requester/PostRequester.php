@@ -1,6 +1,8 @@
 <?php
 namespace Yardan\Requester;
 
+use Exception;
+
 /**
  * Description of PostRequester
  *
