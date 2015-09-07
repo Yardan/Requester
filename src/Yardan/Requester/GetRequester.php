@@ -5,7 +5,7 @@ use Exception;
 
 /**
  * Description of GetRequester
- *
+ * Class for sending HTTP GET REQUEST
  * @author daniar
  */
 class GetRequester extends Requester {
@@ -14,6 +14,10 @@ class GetRequester extends Requester {
         $this->url = $url;
     }
     
+    /**
+     * Get params
+     * @return string
+     */
     protected function getParams() {
         $params = parent::getParams();
         if(empty($params)){

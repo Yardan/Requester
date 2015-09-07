@@ -5,7 +5,7 @@ use Exception;
 
 /**
  * Description of PostRequester
- *
+ * Class for sending HTTP POST REQUEST
  * @author daniar
  */
 class PostRequester extends Requester {
@@ -14,6 +14,10 @@ class PostRequester extends Requester {
         $this->url = $url;
     }
     
+    /**
+     * Get params
+     * @return string|array
+     */
     protected function getParams() {
         $params = parent::getParams();
         $paramsType = $this->getParamsType();

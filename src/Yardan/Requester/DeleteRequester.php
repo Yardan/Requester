@@ -4,30 +4,24 @@ namespace Yardan\Requester;
 use Exception;
 
 /**
- * Description of PostRequester
- * Class for sending HTTP PUT REQUEST
+ * Description of DeleteRequester
+ * Class for sending HTTP DELETE REQUEST
  * @author daniar
  */
-class PutRequester extends Requester {
+class DeleteRequester extends Requester {
     
     public function __construct($url = null) {
         $this->url = $url;
     }
-
-    /**
-     * Get params
-     * @return string|array
-     */
+    
     protected function getParams() {
         $params = parent::getParams();
-        $paramsType = $this->getParamsType();
-        switch ($paramsType) {
-            case 'json':
-                return json_encode($params);
-            default:
-                return $params;
+        if(empty($params)){
+            return '';
         }
+        return '?'.http_build_query($params);
     }
+
 
     /**
      * Send request
@@ -43,9 +37,9 @@ class PutRequester extends Requester {
             }
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $this->url);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $this->getParams());
+            
+            curl_setopt($ch, CURLOPT_URL, $this->url.$this->getParams());
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
             
             if($this->returnHeaders){
                 //return headers

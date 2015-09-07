@@ -1,6 +1,11 @@
 <?php
 namespace Yardan\Requester;
 
+/**
+ * Description of Requester
+ * Class for sending HTTP REQUEST
+ * @author daniar
+ */
 abstract class Requester {
     
     protected $headers = array();
@@ -11,6 +16,12 @@ abstract class Requester {
     protected $paramsType = null;
 
 
+    /**
+     * Initialize exact class
+     * @param string $method
+     * @param string $url
+     * @return \Yardan\Requester\PutRequester|\Yardan\Requester\PostRequester|\Yardan\Requester\GetRequester|\Yardan\Requester\DeleteRequester
+     */
     public static function init($method, $url = null) {
         switch ($method) {
             case 'POST':
@@ -31,17 +42,17 @@ abstract class Requester {
     /**
      * Set header
      * @param string $header
-     * @return \Requester
+     * @return \Yardan\Requester\Requester
      */
     public function setHeader($header){
         $this->headers[] = $header;
         return $this;
     }
-    
+
     /**
      * Set headers
      * @param array $headers
-     * @return \Requester
+     * @return \Yardan\Requester\Requester
      */
     public function setHeaders(array $headers){
         $this->headers = array_merge($this->headers, $headers);
@@ -59,41 +70,62 @@ abstract class Requester {
     /**
      * Return headers?
      * @param boolean $status
-     * @return \Requester
+     * @return \Yardan\Requester\Requester
      */
     public function returnHeaders($status = false){
         $this->returnHeaders = $status;
         return $this;
     }
-    
+
     /**
      * HTTP Auth
      * @param string $login
      * @param string $pass
-     * @return \Requester
+     * @return \Yardan\Requester\Requester
      */
     public function setAuth($login, $pass){
         $this->auth = $login.':'.$pass;
         return $this;
     }
     
+    /**
+     * Set params
+     * @param array $params
+     * @return \Yardan\Requester\Requester
+     */
     public function setParams(array $params){
         $this->params = $params;
         return $this;
     }
     
+    /**
+     * Get params
+     * @return array
+     */
     protected function getParams(){
         return $this->params;
     }
     
+    /**
+     * Set params type
+     * @param string $type
+     * @return \Yardan\Requester\Requester
+     */
     public function setParamsType($type){
         $this->paramsType = $type;
         return $this;
     }
     
+    /**
+     * Get params type
+     * @return string
+     */
     protected function getParamsType(){
         return $this->paramsType;
     }
     
+    /**
+     * Main request
+     */
     abstract public function request($url = null);
 }
